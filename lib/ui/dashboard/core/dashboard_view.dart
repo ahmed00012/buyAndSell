@@ -247,30 +247,9 @@ class _HomeViewState extends State<DashboardView>
       }
     }
 
-    FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData? dynamicLink) async {
-      // ignore: prefer_final_locals
-      Uri? deepLink = dynamicLink?.link;
-      if (deepLink != null) {
-        //  final String path = deepLink.path;
-        //  final List<String> pathList = path.split('=');
-        if (itemId == '') {
-          final Map<String, String> queryParams = deepLink.queryParameters;
-          if (queryParams.isNotEmpty) {
-            itemId = queryParams['item_id'];
-          }
-          final ProductDetailIntentHolder holder = ProductDetailIntentHolder(
-              productId: itemId,
-              heroTagImage: '-1' + itemId! + PsConst.HERO_TAG__IMAGE,
-              heroTagTitle: '-1' + itemId! + PsConst.HERO_TAG__TITLE);
-          Navigator.pushNamed(context, RoutePaths.productDetail,
-              arguments: holder);
-        }
-      }
-      debugPrint('DynamicLinks onLink $deepLink');
-    }, onError: (OnLinkErrorException e) async {
-      debugPrint('DynamicLinks onError $e');
-    });
+    ////////////////////////////////////////////////////////updated
+
+    FirebaseDynamicLinks.instance.onLink;
   }
 
   int getBottonNavigationIndex(int? param) {

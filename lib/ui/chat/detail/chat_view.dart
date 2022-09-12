@@ -385,7 +385,7 @@ class _ChatViewState extends State<ChatView>
           psValueHolder.loginUserId!, psValueHolder.loginUserName);
     }
 
-    _chatRef.child(otherUserId!).onValue.listen((Event event) {
+    _chatRef.child(otherUserId!).onValue.listen((event) {
       if (event.snapshot.value == null) {
         if (isActive == null || isActive != ChatUserStatus.offline && mounted) {
           setState(() {
@@ -394,8 +394,8 @@ class _ChatViewState extends State<ChatView>
           });
         }
       } else {
-        itemId = event.snapshot.value['itemId'];
-        final String? _receiverId = event.snapshot.value['receiver_id'];
+        itemId = event.snapshot.child('itemId').toString();
+        final String? _receiverId = event.snapshot.child('receiver_id').toString();
 
         if (_receiverId == psValueHolder.loginUserId &&
             itemId == widget.itemId) {
@@ -559,10 +559,10 @@ class _ChatViewState extends State<ChatView>
                               reverse: _anchorToBottom,
                               sort: _anchorToBottom
                                   ? (DataSnapshot a, DataSnapshot b) {
-                                      return b.value['addedDate']
+                                      return b.child('addedDate')
                                           .toString()
                                           .compareTo(
-                                              a.value['addedDate'].toString());
+                                              a.child('addedDate').toString());
                                     }
                                   : null,
                               itemBuilder: (BuildContext context,

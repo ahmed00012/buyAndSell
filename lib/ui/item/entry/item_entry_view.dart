@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
-import 'package:flutter_video_info/flutter_video_info.dart';
+ import 'package:flutter_video_info/flutter_video_info.dart';
 import 'package:flutterbuyandsell/api/common/ps_resource.dart';
 import 'package:flutterbuyandsell/api/common/ps_status.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
@@ -2174,7 +2174,8 @@ class ImageUploadHorizontalListState extends State<ImageUploadHorizontalList> {
             print(ex);
           }
           if (videoFilePath != null) {
-            // await PsProgressDialog.showDialog(context);
+            /////////////////////////////////
+            await PsProgressDialog.showDialog(context);
 
             final FlutterVideoInfo? videoInfo = FlutterVideoInfo();
             VideoData? videoData =
@@ -2186,7 +2187,7 @@ class ImageUploadHorizontalListState extends State<ImageUploadHorizontalList> {
               //videoInfo = null;
               videoFilePath!.clear();
             } else {
-              videoData = null;
+              // videoData = null;
               //videoInfo = null;
               videoFilePath!.clear();
               showDialog<dynamic>(
