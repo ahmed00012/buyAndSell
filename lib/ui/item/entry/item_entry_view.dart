@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
- import 'package:flutter_video_info/flutter_video_info.dart';
+
 import 'package:flutterbuyandsell/api/common/ps_resource.dart';
 import 'package:flutterbuyandsell/api/common/ps_status.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
@@ -61,7 +61,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+// import 'package:video_thumbnail/video_thumbnail.dart';
 
 class ItemEntryView extends StatefulWidget {
   const ItemEntryView({
@@ -323,16 +323,16 @@ class _ItemEntryViewState extends State<ItemEntryView> {
       }
     }
 
-    dynamic _getImageFromVideo(String videoPathUrl) async {
-      videoFileThumbnailPath = await VideoThumbnail.thumbnailFile(
-        video: videoPathUrl,
-        imageFormat: ImageFormat.JPEG,
-        maxWidth:
-            128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
-        quality: 25,
-      );
-      return videoFileThumbnailPath;
-    }
+    // dynamic _getImageFromVideo(String videoPathUrl) async {
+    //   videoFileThumbnailPath = await VideoThumbnail.thumbnailFile(
+    //     video: videoPathUrl,
+    //     imageFormat: ImageFormat.JPEG,
+    //     maxWidth:
+    //         128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+    //     quality: 25,
+    //   );
+    //   return videoFileThumbnailPath;
+    // }
 
     dynamic onReorder(int oldIndex, int newIndex) {
       if (galleryImageAsset[oldIndex] != null) {
@@ -609,7 +609,7 @@ class _ItemEntryViewState extends State<ItemEntryView> {
                               selectedVideoImagePath: selectedVideoImagePath,
                               updateImagesFromVideo: updateImagesFromVideo,
                               selectedVideoPath: selectedVideoPath,
-                              getImageFromVideo: _getImageFromVideo,
+                              // getImageFromVideo: _getImageFromVideo,
                               imageDesc1Controller:
                                   galleryProvider!.imageDesc1Controller,
                               provider: _itemEntryProvider,
@@ -2173,34 +2173,34 @@ class ImageUploadHorizontalListState extends State<ImageUploadHorizontalList> {
           } catch (ex) {
             print(ex);
           }
-          if (videoFilePath != null) {
-            /////////////////////////////////
-            await PsProgressDialog.showDialog(context);
-
-            final FlutterVideoInfo? videoInfo = FlutterVideoInfo();
-            VideoData? videoData =
-                await videoInfo!.getVideoInfo(videoFilePath![0].path!);
-            if (videoData!.duration! <= double.parse(psValueHolder.videoDuration ?? '60000')) {
-              await widget.getImageFromVideo!(videoFilePath![0].path);
-              widget.updateImagesFromVideo!(videoFilePath![0].path, -2);
-              videoData = null;
-              //videoInfo = null;
-              videoFilePath!.clear();
-            } else {
-              // videoData = null;
-              //videoInfo = null;
-              videoFilePath!.clear();
-              showDialog<dynamic>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ErrorDialog(
-                        message: Utils.getString(
-                            context, 'error_dialog__select_video'));
-                  });
-            }
-
-            // PsProgressDialog.dismissDialog();
-          }
+          // if (videoFilePath != null) {
+          //   /////////////////////////////////
+          //   await PsProgressDialog.showDialog(context);
+          //
+          //   final FlutterVideoInfo? videoInfo = FlutterVideoInfo();
+          //   VideoData? videoData =
+          //       await videoInfo!.getVideoInfo(videoFilePath![0].path!);
+          //   if (videoData!.duration! <= double.parse(psValueHolder.videoDuration ?? '60000')) {
+          //     await widget.getImageFromVideo!(videoFilePath![0].path);
+          //     widget.updateImagesFromVideo!(videoFilePath![0].path, -2);
+          //     videoData = null;
+          //     //videoInfo = null;
+          //     videoFilePath!.clear();
+          //   } else {
+          //     // videoData = null;
+          //     //videoInfo = null;
+          //     videoFilePath!.clear();
+          //     showDialog<dynamic>(
+          //         context: context,
+          //         builder: (BuildContext context) {
+          //           return ErrorDialog(
+          //               message: Utils.getString(
+          //                   context, 'error_dialog__select_video'));
+          //         });
+          //   }
+          //
+          //   // PsProgressDialog.dismissDialog();
+          // }
         },
       ),
     );
